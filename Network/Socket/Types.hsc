@@ -962,6 +962,7 @@ pokeSockAddr p (SockAddrCan ifIndex) = do
 #if defined(darwin_HOST_OS)
     zeroMemory p (#const sizeof(struct sockaddr_can))
 #endif
+    (#poke struct sockaddr_can, can_family) p ((#const AF_CAN) :: CSaFamily)
     (#poke struct sockaddr_can, can_ifindex) p ifIndex
 #endif
 #if !(defined(IPV6_SOCKET_SUPPORT) \
